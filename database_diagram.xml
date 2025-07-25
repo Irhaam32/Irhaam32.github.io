@@ -1,0 +1,381 @@
+<mxGraphModel dx="2400" dy="1800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2800" pageHeight="2200" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+    
+    <!-- USER TABLES -->
+    <mxCell id="T_Users" value="&lt;b&gt;users&lt;/b&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+      <mxGeometry x="40" y="40" width="280" height="220" as="geometry" />
+    </mxCell>
+    <mxCell id="Users_Fields" value="🔑 user_id: INT PRIMARY KEY AUTO_INCREMENT&lt;br&gt;🔒 username: VARCHAR(50) UNIQUE NOT NULL&lt;br&gt;📧 email: VARCHAR(100) UNIQUE NOT NULL&lt;br&gt;🔐 password_hash: VARCHAR(255) NOT NULL&lt;br&gt;👤 first_name: VARCHAR(50) NOT NULL&lt;br&gt;👤 last_name: VARCHAR(50) NOT NULL&lt;br&gt;📱 phone_number: VARCHAR(20)&lt;br&gt;🏠 address: TEXT&lt;br&gt;🖼️ profile_image: VARCHAR(255)&lt;br&gt;📋 user_type: ENUM('student','teacher','admin')&lt;br&gt;✅ is_active: BOOLEAN DEFAULT TRUE&lt;br&gt;📅 created_at: TIMESTAMP DEFAULT CURRENT_TIMESTAMP&lt;br&gt;📅 updated_at: TIMESTAMP DEFAULT CURRENT_TIMESTAMP&lt;br&gt;📅 last_login: TIMESTAMP" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="T_Users">
+      <mxGeometry y="26" width="280" height="194" as="geometry" />
+    </mxCell>
+
+    <mxCell id="T_Students" value="&lt;b&gt;students&lt;/b&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+      <mxGeometry x="40" y="300" width="280" height="180" as="geometry" />
+    </mxCell>
+    <mxCell id="Students_Fields" value="🔑 student_id: INT PRIMARY KEY AUTO_INCREMENT&lt;br&gt;🔗 user_id: INT FOREIGN KEY → users(user_id)&lt;br&gt;📚 student_number: VARCHAR(20) UNIQUE&lt;br&gt;🎓 grade_level: INT&lt;br&gt;📖 learning_style: VARCHAR(50)&lt;br&gt;🎯 major: VARCHAR(100)&lt;br&gt;📊 gpa: DECIMAL(3,2)&lt;br&gt;🎓 graduation_year: INT&lt;br&gt;👨‍👩‍👧‍👦 parent_contact: VARCHAR(100)&lt;br&gt;🚨 emergency_contact: VARCHAR(100)&lt;br&gt;⏰ study_hours_per_week: INT&lt;br&gt;🕐 preferred_study_time: VARCHAR(50)&lt;br&gt;♿ accessibility_needs: JSON&lt;br&gt;⚙️ learning_preferences: JSON" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="T_Students">
+      <mxGeometry y="26" width="280" height="154" as="geometry" />
+    </mxCell>
+
+    <mxCell id="T_Teachers" value="&lt;b&gt;teachers&lt;/b&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+      <mxGeometry x="360" y="300" width="280" height="160" as="geometry" />
+    </mxCell>
+    <mxCell id="Teachers_Fields" value="🔑 teacher_id: INT PRIMARY KEY AUTO_INCREMENT&lt;br&gt;🔗 user_id: INT FOREIGN KEY → users(user_id)&lt;br&gt;🏢 employee_id: VARCHAR(20) UNIQUE&lt;br&gt;🏛️ department: VARCHAR(100)&lt;br&gt;📅 hire_date: DATE&lt;br&gt;🏢 office_location: VARCHAR(100)&lt;br&gt;🕐 office_hours: VARCHAR(100)&lt;br&gt;🎓 education_level: VARCHAR(50)&lt;br&gt;📊 years_experience: INT&lt;br&gt;💰 salary_grade: VARCHAR(10)&lt;br&gt;🔬 specializations: JSON&lt;br&gt;📚 research_interests: JSON" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="T_Teachers">
+      <mxGeometry y="26" width="280" height="134" as="geometry" />
+    </mxCell>
+
+    <mxCell id="T_Admins" value="&lt;b&gt;admins&lt;/b&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+      <mxGeometry x="680" y="300" width="280" height="140" as="geometry" />
+    </mxCell>
+    <mxCell id="Admins_Fields" value="🔑 admin_id: INT PRIMARY KEY AUTO_INCREMENT&lt;br&gt;🔗 user_id: INT FOREIGN KEY → users(user_id)&lt;br&gt;🔐 access_level: INT DEFAULT 1&lt;br&gt;🏛️ department: VARCHAR(100)&lt;br&gt;👨‍💼 supervisor_id: INT&lt;br&gt;🔒 security_clearance: VARCHAR(50)&lt;br&gt;✅ audit_permissions: BOOLEAN DEFAULT FALSE&lt;br&gt;💾 backup_permissions: BOOLEAN DEFAULT FALSE&lt;br&gt;⚙️ system_access_rights: JSON&lt;br&gt;📋 privileges: JSON" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="T_Admins">
+      <mxGeometry y="26" width="280" height="114" as="geometry" />
+    </mxCell>
+
+    <!-- COURSE CONTENT TABLES -->
+    <mxCell id="T_Courses" value="&lt;b&gt;courses&lt;/b&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+      <mxGeometry x="40" y="520" width="300" height="200" as="geometry" />
+    </mxCell>
+    <mxCell id="Courses_Fields" value="🔑 course_id: INT PRIMARY KEY AUTO_INCREMENT&lt;br&gt;🔗 teacher_id: INT FOREIGN KEY → teachers(teacher_id)&lt;br&gt;📚 title: VARCHAR(200) NOT NULL&lt;br&gt;📝 description: TEXT&lt;br&gt;🏷️ course_code: VARCHAR(20) UNIQUE&lt;br&gt;🎯 credits: INT&lt;br&gt;📅 duration_weeks: INT&lt;br&gt;📊 difficulty_level: ENUM('beginner','intermediate','advanced')&lt;br&gt;🔗 prerequisites: JSON&lt;br&gt;🎯 learning_objectives: JSON&lt;br&gt;📋 syllabus: TEXT&lt;br&gt;👥 max_students: INT&lt;br&gt;📊 current_enrollment: INT DEFAULT 0&lt;br&gt;📅 start_date: DATE&lt;br&gt;📅 end_date: DATE&lt;br&gt;🏷️ category: VARCHAR(100)&lt;br&gt;🏷️ tags: JSON" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="T_Courses">
+      <mxGeometry y="26" width="300" height="174" as="geometry" />
+    </mxCell>
+
+    <mxCell id="T_Modules" value="&lt;b&gt;modules&lt;/b&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+      <mxGeometry x="380" y="520" width="300" height="180" as="geometry" />
+    </mxCell>
+    <mxCell id="Modules_Fields" value="🔑 module_id: INT PRIMARY KEY AUTO_INCREMENT&lt;br&gt;🔗 course_id: INT FOREIGN KEY → courses(course_id)&lt;br&gt;📚 title: VARCHAR(200) NOT NULL&lt;br&gt;📝 description: TEXT&lt;br&gt;📊 order_index: INT&lt;br&gt;⏱️ estimated_duration: INT (minutes)&lt;br&gt;🎯 learning_outcomes: JSON&lt;br&gt;📄 content_type: VARCHAR(50)&lt;br&gt;📊 difficulty_level: INT (1-10)&lt;br&gt;🔗 prerequisites: JSON&lt;br&gt;📚 resources: JSON&lt;br&gt;✅ is_mandatory: BOOLEAN DEFAULT TRUE&lt;br&gt;🔓 unlock_criteria: JSON&lt;br&gt;📅 created_at: TIMESTAMP DEFAULT CURRENT_TIMESTAMP&lt;br&gt;📅 updated_at: TIMESTAMP DEFAULT CURRENT_TIMESTAMP" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="T_Modules">
+      <mxGeometry y="26" width="300" height="154" as="geometry" />
+    </mxCell>
+
+    <mxCell id="T_Quizzes" value="&lt;b&gt;quizzes&lt;/b&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+      <mxGeometry x="720" y="520" width="300" height="200" as="geometry" />
+    </mxCell>
+    <mxCell id="Quizzes_Fields" value="🔑 quiz_id: INT PRIMARY KEY AUTO_INCREMENT&lt;br&gt;🔗 module_id: INT FOREIGN KEY → modules(module_id)&lt;br&gt;📚 title: VARCHAR(200) NOT NULL&lt;br&gt;📝 description: TEXT&lt;br&gt;⏱️ time_limit: INT (minutes)&lt;br&gt;🔄 max_attempts: INT DEFAULT 3&lt;br&gt;📊 passing_score: DECIMAL(5,2)&lt;br&gt;📈 question_count: INT&lt;br&gt;🔀 randomize_questions: BOOLEAN DEFAULT FALSE&lt;br&gt;👁️ show_results_immediately: BOOLEAN DEFAULT TRUE&lt;br&gt;📖 allow_review: BOOLEAN DEFAULT TRUE&lt;br&gt;📊 difficulty_level: ENUM('easy','medium','hard')&lt;br&gt;⚖️ weight: DECIMAL(5,2) DEFAULT 1.0&lt;br&gt;✅ is_active: BOOLEAN DEFAULT TRUE&lt;br&gt;📅 created_date: TIMESTAMP DEFAULT CURRENT_TIMESTAMP&lt;br&gt;📅 updated_date: TIMESTAMP DEFAULT CURRENT_TIMESTAMP" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="T_Quizzes">
+      <mxGeometry y="26" width="300" height="174" as="geometry" />
+    </mxCell>
+
+    <mxCell id="T_Questions" value="&lt;b&gt;questions&lt;/b&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+      <mxGeometry x="1060" y="520" width="320" height="220" as="geometry" />
+    </mxCell>
+    <mxCell id="Questions_Fields" value="🔑 question_id: INT PRIMARY KEY AUTO_INCREMENT&lt;br&gt;🔗 quiz_id: INT FOREIGN KEY → quizzes(quiz_id)&lt;br&gt;❓ text: TEXT NOT NULL&lt;br&gt;🏷️ topic_tag: VARCHAR(100)&lt;br&gt;📊 difficulty_level: INT (1-10)&lt;br&gt;📝 question_type: ENUM('multiple_choice','true_false','essay','fill_blank')&lt;br&gt;💯 points: INT DEFAULT 1&lt;br&gt;💡 explanation: TEXT&lt;br&gt;💭 hints: JSON&lt;br&gt;🖼️ media_url: VARCHAR(255)&lt;br&gt;⏱️ time_limit: INT (seconds)&lt;br&gt;📊 order_index: INT&lt;br&gt;🧠 bloom_taxonomy_level: VARCHAR(50)&lt;br&gt;🎯 learning_objective: VARCHAR(255)&lt;br&gt;📅 created_date: TIMESTAMP DEFAULT CURRENT_TIMESTAMP&lt;br&gt;📅 updated_date: TIMESTAMP DEFAULT CURRENT_TIMESTAMP" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="T_Questions">
+      <mxGeometry y="26" width="320" height="194" as="geometry" />
+    </mxCell>
+
+    <mxCell id="T_AnswerOptions" value="&lt;b&gt;answer_options&lt;/b&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+      <mxGeometry x="1420" y="520" width="300" height="160" as="geometry" />
+    </mxCell>
+    <mxCell id="AnswerOptions_Fields" value="🔑 option_id: INT PRIMARY KEY AUTO_INCREMENT&lt;br&gt;🔗 question_id: INT FOREIGN KEY → questions(question_id)&lt;br&gt;📝 text: TEXT NOT NULL&lt;br&gt;✅ is_correct: BOOLEAN DEFAULT FALSE&lt;br&gt;📊 order_index: INT&lt;br&gt;💡 explanation: TEXT&lt;br&gt;🖼️ media_url: VARCHAR(255)&lt;br&gt;💬 feedback_text: TEXT&lt;br&gt;📅 created_date: TIMESTAMP DEFAULT CURRENT_TIMESTAMP&lt;br&gt;📅 updated_date: TIMESTAMP DEFAULT CURRENT_TIMESTAMP" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="T_AnswerOptions">
+      <mxGeometry y="26" width="300" height="134" as="geometry" />
+    </mxCell>
+
+    <!-- ENROLLMENT AND INTERACTION TABLES -->
+    <mxCell id="T_Enrollments" value="&lt;b&gt;enrollments&lt;/b&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+      <mxGeometry x="40" y="760" width="300" height="180" as="geometry" />
+    </mxCell>
+    <mxCell id="Enrollments_Fields" value="🔑 enrollment_id: INT PRIMARY KEY AUTO_INCREMENT&lt;br&gt;🔗 student_id: INT FOREIGN KEY → students(student_id)&lt;br&gt;🔗 course_id: INT FOREIGN KEY → courses(course_id)&lt;br&gt;📅 enrollment_date: TIMESTAMP DEFAULT CURRENT_TIMESTAMP&lt;br&gt;📅 completion_date: TIMESTAMP NULL&lt;br&gt;📊 status: ENUM('active','completed','withdrawn','suspended')&lt;br&gt;🎓 grade: VARCHAR(5)&lt;br&gt;🎯 credits: INT&lt;br&gt;📚 semester: VARCHAR(20)&lt;br&gt;📅 academic_year: VARCHAR(10)&lt;br&gt;💰 payment_status: ENUM('paid','pending','overdue')&lt;br&gt;📅 withdrawal_date: TIMESTAMP NULL&lt;br&gt;📝 notes: TEXT" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="T_Enrollments">
+      <mxGeometry y="26" width="300" height="154" as="geometry" />
+    </mxCell>
+
+    <mxCell id="T_QuizAttempts" value="&lt;b&gt;quiz_attempts&lt;/b&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+      <mxGeometry x="380" y="760" width="320" height="220" as="geometry" />
+    </mxCell>
+    <mxCell id="QuizAttempts_Fields" value="🔑 attempt_id: INT PRIMARY KEY AUTO_INCREMENT&lt;br&gt;🔗 student_id: INT FOREIGN KEY → students(student_id)&lt;br&gt;🔗 quiz_id: INT FOREIGN KEY → quizzes(quiz_id)&lt;br&gt;📊 score: DECIMAL(5,2)&lt;br&gt;📊 max_score: DECIMAL(5,2)&lt;br&gt;📈 percentage: DECIMAL(5,2)&lt;br&gt;✅ is_passed: BOOLEAN DEFAULT FALSE&lt;br&gt;⏰ start_time: TIMESTAMP&lt;br&gt;⏰ end_time: TIMESTAMP NULL&lt;br&gt;📅 completed_at: TIMESTAMP NULL&lt;br&gt;⏱️ time_taken: INT (seconds)&lt;br&gt;🔢 attempt_number: INT&lt;br&gt;🌐 ip_address: VARCHAR(45)&lt;br&gt;🖥️ user_agent: TEXT&lt;br&gt;⚠️ cheating_flags: JSON&lt;br&gt;💬 feedback: TEXT&lt;br&gt;📋 grade_released: BOOLEAN DEFAULT FALSE" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="T_QuizAttempts">
+      <mxGeometry y="26" width="320" height="194" as="geometry" />
+    </mxCell>
+
+    <mxCell id="T_StudentResponses" value="&lt;b&gt;student_responses&lt;/b&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+      <mxGeometry x="740" y="760" width="320" height="200" as="geometry" />
+    </mxCell>
+    <mxCell id="StudentResponses_Fields" value="🔑 response_id: INT PRIMARY KEY AUTO_INCREMENT&lt;br&gt;🔗 attempt_id: INT FOREIGN KEY → quiz_attempts(attempt_id)&lt;br&gt;🔗 question_id: INT FOREIGN KEY → questions(question_id)&lt;br&gt;🔗 chosen_option_id: INT FOREIGN KEY → answer_options(option_id)&lt;br&gt;📝 answer_text: TEXT&lt;br&gt;✅ is_correct: BOOLEAN&lt;br&gt;💯 points_earned: DECIMAL(5,2)&lt;br&gt;⏱️ time_spent: INT (seconds)&lt;br&gt;📅 response_time: TIMESTAMP DEFAULT CURRENT_TIMESTAMP&lt;br&gt;📊 confidence_level: INT (1-5)&lt;br&gt;💡 hints_used: INT DEFAULT 0&lt;br&gt;🚩 flagged_for_review: BOOLEAN DEFAULT FALSE&lt;br&gt;📊 partial_credit: DECIMAL(5,2) DEFAULT 0" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="T_StudentResponses">
+      <mxGeometry y="26" width="320" height="174" as="geometry" />
+    </mxCell>
+
+    <!-- ADDITIONAL SYSTEM TABLES -->
+    <mxCell id="T_Assignments" value="&lt;b&gt;assignments&lt;/b&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+      <mxGeometry x="1100" y="760" width="300" height="180" as="geometry" />
+    </mxCell>
+    <mxCell id="Assignments_Fields" value="🔑 assignment_id: INT PRIMARY KEY AUTO_INCREMENT&lt;br&gt;🔗 course_id: INT FOREIGN KEY → courses(course_id)&lt;br&gt;📚 title: VARCHAR(200) NOT NULL&lt;br&gt;📝 description: TEXT&lt;br&gt;📅 due_date: TIMESTAMP&lt;br&gt;💯 max_points: INT&lt;br&gt;📄 submission_type: ENUM('file','text','url','code')&lt;br&gt;📋 rubric: JSON&lt;br&gt;⏰ late_penalty: DECIMAL(5,2)&lt;br&gt;👥 group_assignment: BOOLEAN DEFAULT FALSE&lt;br&gt;🤖 auto_grading: BOOLEAN DEFAULT FALSE&lt;br&gt;📅 created_at: TIMESTAMP DEFAULT CURRENT_TIMESTAMP&lt;br&gt;📅 updated_at: TIMESTAMP DEFAULT CURRENT_TIMESTAMP" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="T_Assignments">
+      <mxGeometry y="26" width="300" height="154" as="geometry" />
+    </mxCell>
+
+    <mxCell id="T_Notifications" value="&lt;b&gt;notifications&lt;/b&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+      <mxGeometry x="1440" y="760" width="300" height="160" as="geometry" />
+    </mxCell>
+    <mxCell id="Notifications_Fields" value="🔑 notification_id: INT PRIMARY KEY AUTO_INCREMENT&lt;br&gt;🔗 user_id: INT FOREIGN KEY → users(user_id)&lt;br&gt;📚 title: VARCHAR(200) NOT NULL&lt;br&gt;📝 message: TEXT NOT NULL&lt;br&gt;🏷️ type: ENUM('info','warning','success','error')&lt;br&gt;⚡ priority: ENUM('low','medium','high','urgent')&lt;br&gt;📅 created_at: TIMESTAMP DEFAULT CURRENT_TIMESTAMP&lt;br&gt;📅 read_at: TIMESTAMP NULL&lt;br&gt;✅ is_read: BOOLEAN DEFAULT FALSE&lt;br&gt;🔗 action_url: VARCHAR(255)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="T_Notifications">
+      <mxGeometry y="26" width="300" height="134" as="geometry" />
+    </mxCell>
+
+    <!-- AI ANALYTICS TABLES -->
+    <mxCell id="T_Analytics" value="&lt;b&gt;analytics_data&lt;/b&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+      <mxGeometry x="40" y="1000" width="320" height="180" as="geometry" />
+    </mxCell>
+    <mxCell id="Analytics_Fields" value="🔑 analytics_id: INT PRIMARY KEY AUTO_INCREMENT&lt;br&gt;🔗 student_id: INT FOREIGN KEY → students(student_id)&lt;br&gt;📊 performance_score: DECIMAL(5,2)&lt;br&gt;💪 strengths: JSON&lt;br&gt;⚠️ weaknesses: JSON&lt;br&gt;📈 learning_patterns: JSON&lt;br&gt;🎯 engagement_score: DECIMAL(5,2)&lt;br&gt;📊 success_prediction: DECIMAL(5,2)&lt;br&gt;📚 recommended_topics: JSON&lt;br&gt;⏰ study_time_analysis: JSON&lt;br&gt;🧠 learning_style_analysis: JSON&lt;br&gt;📅 analysis_date: TIMESTAMP DEFAULT CURRENT_TIMESTAMP&lt;br&gt;📅 updated_at: TIMESTAMP DEFAULT CURRENT_TIMESTAMP" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="T_Analytics">
+      <mxGeometry y="26" width="320" height="154" as="geometry" />
+    </mxCell>
+
+    <mxCell id="T_Recommendations" value="&lt;b&gt;recommendations&lt;/b&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+      <mxGeometry x="400" y="1000" width="320" height="160" as="geometry" />
+    </mxCell>
+    <mxCell id="Recommendations_Fields" value="🔑 recommendation_id: INT PRIMARY KEY AUTO_INCREMENT&lt;br&gt;🔗 student_id: INT FOREIGN KEY → students(student_id)&lt;br&gt;🎯 recommendation_type: ENUM('content','study_schedule','peer_group')&lt;br&gt;📚 recommended_content: JSON&lt;br&gt;📊 confidence_score: DECIMAL(5,2)&lt;br&gt;📅 valid_until: TIMESTAMP&lt;br&gt;✅ is_applied: BOOLEAN DEFAULT FALSE&lt;br&gt;📊 effectiveness_score: DECIMAL(5,2)&lt;br&gt;💬 feedback: TEXT&lt;br&gt;📅 created_at: TIMESTAMP DEFAULT CURRENT_TIMESTAMP&lt;br&gt;📅 updated_at: TIMESTAMP DEFAULT CURRENT_TIMESTAMP" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="T_Recommendations">
+      <mxGeometry y="26" width="320" height="134" as="geometry" />
+    </mxCell>
+
+    <mxCell id="T_ChatSessions" value="&lt;b&gt;chat_sessions&lt;/b&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+      <mxGeometry x="760" y="1000" width="320" height="140" as="geometry" />
+    </mxCell>
+    <mxCell id="ChatSessions_Fields" value="🔑 session_id: INT PRIMARY KEY AUTO_INCREMENT&lt;br&gt;🔗 student_id: INT FOREIGN KEY → students(student_id)&lt;br&gt;💬 query_text: TEXT NOT NULL&lt;br&gt;🤖 response_text: TEXT NOT NULL&lt;br&gt;🎯 intent: VARCHAR(100)&lt;br&gt;📊 confidence_score: DECIMAL(5,2)&lt;br&gt;😊 sentiment: ENUM('positive','neutral','negative')&lt;br&gt;⚙️ context_data: JSON&lt;br&gt;📅 session_start: TIMESTAMP DEFAULT CURRENT_TIMESTAMP&lt;br&gt;📅 session_end: TIMESTAMP NULL" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="T_ChatSessions">
+      <mxGeometry y="26" width="320" height="114" as="geometry" />
+    </mxCell>
+
+    <!-- AUDIT AND SYSTEM TABLES -->
+    <mxCell id="T_AuditLogs" value="&lt;b&gt;audit_logs&lt;/b&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;fillColor=#f0f0f0;strokeColor=#666666;" vertex="1" parent="1">
+      <mxGeometry x="1120" y="1000" width="320" height="140" as="geometry" />
+    </mxCell>
+    <mxCell id="AuditLogs_Fields" value="🔑 log_id: INT PRIMARY KEY AUTO_INCREMENT&lt;br&gt;🔗 user_id: INT FOREIGN KEY → users(user_id)&lt;br&gt;🎬 action: VARCHAR(100) NOT NULL&lt;br&gt;📋 table_name: VARCHAR(100)&lt;br&gt;🔢 record_id: INT&lt;br&gt;📊 old_values: JSON&lt;br&gt;📊 new_values: JSON&lt;br&gt;🌐 ip_address: VARCHAR(45)&lt;br&gt;🖥️ user_agent: TEXT&lt;br&gt;📅 created_at: TIMESTAMP DEFAULT CURRENT_TIMESTAMP" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="T_AuditLogs">
+      <mxGeometry y="26" width="320" height="114" as="geometry" />
+    </mxCell>
+
+    <mxCell id="T_SystemSettings" value="&lt;b&gt;system_settings&lt;/b&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;fillColor=#f0f0f0;strokeColor=#666666;" vertex="1" parent="1">
+      <mxGeometry x="1480" y="1000" width="300" height="120" as="geometry" />
+    </mxCell>
+    <mxCell id="SystemSettings_Fields" value="🔑 setting_id: INT PRIMARY KEY AUTO_INCREMENT&lt;br&gt;🏷️ setting_key: VARCHAR(100) UNIQUE NOT NULL&lt;br&gt;📊 setting_value: TEXT&lt;br&gt;📝 description: TEXT&lt;br&gt;🏷️ category: VARCHAR(50)&lt;br&gt;✅ is_active: BOOLEAN DEFAULT TRUE&lt;br&gt;📅 created_at: TIMESTAMP DEFAULT CURRENT_TIMESTAMP&lt;br&gt;📅 updated_at: TIMESTAMP DEFAULT CURRENT_TIMESTAMP" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="T_SystemSettings">
+      <mxGeometry y="26" width="300" height="94" as="geometry" />
+    </mxCell>
+
+    <!-- FOREIGN KEY RELATIONSHIPS -->
+    
+    <!-- User Inheritance Relationships -->
+    <mxCell id="FK_Students_Users" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.2;entryY=1;entryDx=0;entryDy=0;strokeColor=#6c8ebf;strokeWidth=2;" edge="1" parent="1" source="T_Students" target="T_Users">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="180" y="300" as="sourcePoint" />
+        <mxPoint x="96" y="260" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="FK_Label_Students" value="FK: user_id" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontColor=#6c8ebf;" vertex="1" connectable="0" parent="FK_Students_Users">
+      <mxGeometry x="-0.2" y="-10" as="geometry" />
+    </mxCell>
+
+    <mxCell id="FK_Teachers_Users" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;strokeColor=#6c8ebf;strokeWidth=2;" edge="1" parent="1" source="T_Teachers" target="T_Users">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="500" y="300" as="sourcePoint" />
+        <mxPoint x="500" y="260" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="FK_Label_Teachers" value="FK: user_id" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontColor=#6c8ebf;" vertex="1" connectable="0" parent="FK_Teachers_Users">
+      <mxGeometry y="-10" as="geometry" />
+    </mxCell>
+
+    <mxCell id="FK_Admins_Users" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.8;entryY=1;entryDx=0;entryDy=0;strokeColor=#6c8ebf;strokeWidth=2;" edge="1" parent="1" source="T_Admins" target="T_Users">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="820" y="300" as="sourcePoint" />
+        <mxPoint x="264" y="260" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="FK_Label_Admins" value="FK: user_id" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontColor=#6c8ebf;" vertex="1" connectable="0" parent="FK_Admins_Users">
+      <mxGeometry x="0.2" y="-10" as="geometry" />
+    </mxCell>
+
+    <!-- Course Content Relationships -->
+    <mxCell id="FK_Courses_Teachers" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;strokeColor=#9673a6;strokeWidth=2;" edge="1" parent="1" source="T_Courses" target="T_Teachers">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="190" y="520" as="sourcePoint" />
+        <mxPoint x="500" y="460" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="FK_Label_Courses" value="FK: teacher_id" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontColor=#9673a6;" vertex="1" connectable="0" parent="FK_Courses_Teachers">
+      <mxGeometry y="-10" as="geometry" />
+    </mxCell>
+
+    <mxCell id="FK_Modules_Courses" value="" style="endArrow=classic;html=1;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#9673a6;strokeWidth=2;" edge="1" parent="1" source="T_Modules" target="T_Courses">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="380" y="610" as="sourcePoint" />
+        <mxPoint x="340" y="610" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="FK_Label_Modules" value="FK: course_id" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontColor=#9673a6;" vertex="1" connectable="0" parent="FK_Modules_Courses">
+      <mxGeometry y="-10" as="geometry" />
+    </mxCell>
+
+    <mxCell id="FK_Quizzes_Modules" value="" style="endArrow=classic;html=1;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#9673a6;strokeWidth=2;" edge="1" parent="1" source="T_Quizzes" target="T_Modules">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="720" y="620" as="sourcePoint" />
+        <mxPoint x="680" y="610" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="FK_Label_Quizzes" value="FK: module_id" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontColor=#9673a6;" vertex="1" connectable="0" parent="FK_Quizzes_Modules">
+      <mxGeometry y="-10" as="geometry" />
+    </mxCell>
+
+    <mxCell id="FK_Questions_Quizzes" value="" style="endArrow=classic;html=1;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#9673a6;strokeWidth=2;" edge="1" parent="1" source="T_Questions" target="T_Quizzes">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="1060" y="630" as="sourcePoint" />
+        <mxPoint x="1020" y="620" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="FK_Label_Questions" value="FK: quiz_id" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontColor=#9673a6;" vertex="1" connectable="0" parent="FK_Questions_Quizzes">
+      <mxGeometry y="-10" as="geometry" />
+    </mxCell>
+
+    <mxCell id="FK_AnswerOptions_Questions" value="" style="endArrow=classic;html=1;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#9673a6;strokeWidth=2;" edge="1" parent="1" source="T_AnswerOptions" target="T_Questions">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="1420" y="600" as="sourcePoint" />
+        <mxPoint x="1380" y="630" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="FK_Label_AnswerOptions" value="FK: question_id" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontColor=#9673a6;" vertex="1" connectable="0" parent="FK_AnswerOptions_Questions">
+      <mxGeometry y="-10" as="geometry" />
+    </mxCell>
+
+    <!-- Enrollment Relationships -->
+    <mxCell id="FK_Enrollments_Students" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;strokeColor=#d6b656;strokeWidth=2;" edge="1" parent="1" source="T_Enrollments" target="T_Students">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="190" y="760" as="sourcePoint" />
+        <mxPoint x="180" y="480" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="FK_Label_Enrollments_Students" value="FK: student_id" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontColor=#d6b656;" vertex="1" connectable="0" parent="FK_Enrollments_Students">
+      <mxGeometry y="-10" as="geometry" />
+    </mxCell>
+
+    <mxCell id="FK_Enrollments_Courses" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;strokeColor=#d6b656;strokeWidth=2;" edge="1" parent="1" source="T_Enrollments" target="T_Courses">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="190" y="760" as="sourcePoint" />
+        <mxPoint x="190" y="720" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="FK_Label_Enrollments_Courses" value="FK: course_id" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontColor=#d6b656;" vertex="1" connectable="0" parent="FK_Enrollments_Courses">
+      <mxGeometry x="0.5" y="-10" as="geometry" />
+    </mxCell>
+
+    <!-- Quiz Attempt Relationships -->
+    <mxCell id="FK_QuizAttempts_Students" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.2;exitY=0;exitDx=0;exitDy=0;entryX=0.8;entryY=1;entryDx=0;entryDy=0;strokeColor=#d6b656;strokeWidth=2;" edge="1" parent="1" source="T_QuizAttempts" target="T_Students">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="444" y="760" as="sourcePoint" />
+        <mxPoint x="264" y="480" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="FK_Label_QuizAttempts_Students" value="FK: student_id" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontColor=#d6b656;" vertex="1" connectable="0" parent="FK_QuizAttempts_Students">
+      <mxGeometry y="-10" as="geometry" />
+    </mxCell>
+
+    <mxCell id="FK_QuizAttempts_Quizzes" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.8;exitY=0;exitDx=0;exitDy=0;entryX=0.2;entryY=1;entryDx=0;entryDy=0;strokeColor=#d6b656;strokeWidth=2;" edge="1" parent="1" source="T_QuizAttempts" target="T_Quizzes">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="636" y="760" as="sourcePoint" />
+        <mxPoint x="780" y="720" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="FK_Label_QuizAttempts_Quizzes" value="FK: quiz_id" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontColor=#d6b656;" vertex="1" connectable="0" parent="FK_QuizAttempts_Quizzes">
+      <mxGeometry y="-10" as="geometry" />
+    </mxCell>
+
+    <!-- Student Response Relationships -->
+    <mxCell id="FK_StudentResponses_QuizAttempts" value="" style="endArrow=classic;html=1;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#d6b656;strokeWidth=2;" edge="1" parent="1" source="T_StudentResponses" target="T_QuizAttempts">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="740" y="860" as="sourcePoint" />
+        <mxPoint x="700" y="860" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="FK_Label_StudentResponses_Attempts" value="FK: attempt_id" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontColor=#d6b656;" vertex="1" connectable="0" parent="FK_StudentResponses_QuizAttempts">
+      <mxGeometry y="-10" as="geometry" />
+    </mxCell>
+
+    <mxCell id="FK_StudentResponses_Questions" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.8;exitY=0;exitDx=0;exitDy=0;entryX=0.2;entryY=1;entryDx=0;entryDy=0;strokeColor=#d6b656;strokeWidth=2;" edge="1" parent="1" source="T_StudentResponses" target="T_Questions">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="996" y="760" as="sourcePoint" />
+        <mxPoint x="1124" y="740" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="FK_Label_StudentResponses_Questions" value="FK: question_id" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontColor=#d6b656;" vertex="1" connectable="0" parent="FK_StudentResponses_Questions">
+      <mxGeometry y="-10" as="geometry" />
+    </mxCell>
+
+    <mxCell id="FK_StudentResponses_AnswerOptions" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=1;entryDx=0;entryDy=0;strokeColor=#d6b656;strokeWidth=2;" edge="1" parent="1" source="T_StudentResponses" target="T_AnswerOptions">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="1060" y="860" as="sourcePoint" />
+        <mxPoint x="1420" y="680" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="FK_Label_StudentResponses_Options" value="FK: chosen_option_id" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontColor=#d6b656;" vertex="1" connectable="0" parent="FK_StudentResponses_AnswerOptions">
+      <mxGeometry y="-10" as="geometry" />
+    </mxCell>
+
+    <!-- AI Service Relationships -->
+    <mxCell id="FK_Analytics_Students" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.2;entryY=1;entryDx=0;entryDy=0;strokeColor=#82b366;strokeWidth=2;" edge="1" parent="1" source="T_Analytics" target="T_Students">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="200" y="1000" as="sourcePoint" />
+        <mxPoint x="96" y="480" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="FK_Label_Analytics" value="FK: student_id" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontColor=#82b366;" vertex="1" connectable="0" parent="FK_Analytics_Students">
+      <mxGeometry y="-10" as="geometry" />
+    </mxCell>
+
+    <mxCell id="FK_Recommendations_Students" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.2;exitY=0;exitDx=0;exitDy=0;entryX=0.8;entryY=1;entryDx=0;entryDy=0;strokeColor=#82b366;strokeWidth=2;" edge="1" parent="1" source="T_Recommendations" target="T_Students">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="464" y="1000" as="sourcePoint" />
+        <mxPoint x="264" y="480" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="FK_Label_Recommendations" value="FK: student_id" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontColor=#82b366;" vertex="1" connectable="0" parent="FK_Recommendations_Students">
+      <mxGeometry y="-10" as="geometry" />
+    </mxCell>
+
+    <mxCell id="FK_ChatSessions_Students" value="" style="endArrow=classic;html=1;rounded=0;exitX=0;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=1;entryDx=0;entryDy=0;strokeColor=#82b366;strokeWidth=2;" edge="1" parent="1" source="T_ChatSessions" target="T_Students">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="760" y="1000" as="sourcePoint" />
+        <mxPoint x="320" y="480" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="FK_Label_ChatSessions" value="FK: student_id" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontColor=#82b366;" vertex="1" connectable="0" parent="FK_ChatSessions_Students">
+      <mxGeometry y="-10" as="geometry" />
+    </mxCell>
+
+    <!-- Additional Relationships -->
+    <mxCell id="FK_Assignments_Courses" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.2;exitY=0;exitDx=0;exitDy=0;entryX=0.8;entryY=1;entryDx=0;entryDy=0;strokeColor=#b85450;strokeWidth=2;" edge="1" parent="1" source="T_Assignments" target="T_Courses">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="1160" y="760" as="sourcePoint" />
+        <mxPoint x="280" y="720" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="FK_Label_Assignments" value="FK: course_id" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontColor=#b85450;" vertex="1" connectable="0" parent="FK_Assignments_Courses">
+      <mxGeometry y="-10" as="geometry" />
+    </mxCell>
+
+    <mxCell id="FK_Notifications_Users" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.2;exitY=0;exitDx=0;exitDy=0;entryX=0.8;entryY=1;entryDx=0;entryDy=0;strokeColor=#b85450;strokeWidth=2;" edge="1" parent="1" source="T_Notifications" target="T_Users">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="1500" y="760" as="sourcePoint" />
+        <mxPoint x="264" y="260" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="FK_Label_Notifications" value="FK: user_id" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontColor=#b85450;" vertex="1" connectable="0" parent="FK_Notifications_Users">
+      <mxGeometry y="-10" as="geometry" />
+    </mxCell>
+
+    <mxCell id="FK_AuditLogs_Users" value="" style="endArrow=classic;html=1;rounded=0;exitX=0;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=1;entryDx=0;entryDy=0;strokeColor=#666666;strokeWidth=2;" edge="1" parent="1" source="T_AuditLogs" target="T_Users">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="1120" y="1000" as="sourcePoint" />
+        <mxPoint x="320" y="260" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="FK_Label_AuditLogs" value="FK: user_id" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontColor=#666666;" vertex="1" connectable="0" parent="FK_AuditLogs_Users">
+      <mxGeometry y="-10" as="geometry" />
+    </mxCell>
+
+    <!-- LEGEND -->
+    <mxCell id="Legend" value="&lt;b&gt;🗂️ DATABASE LEGEND&lt;/b&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+      <mxGeometry x="40" y="1220" width="400" height="200" as="geometry" />
+    </mxCell>
+    <mxCell id="Legend_Content" value="🔑 = Primary Key&lt;br&gt;🔗 = Foreign Key&lt;br&gt;📚 = Text/Content Fields&lt;br&gt;📊 = Numeric/Statistical Fields&lt;br&gt;📅 = Date/Time Fields&lt;br&gt;✅ = Boolean Fields&lt;br&gt;🏷️ = Enum/Category Fields&lt;br&gt;⚙️ = JSON/Configuration Fields&lt;br&gt;&lt;br&gt;&lt;b&gt;🎨 COLOR CODING:&lt;/b&gt;&lt;br&gt;🔵 Blue = User Management Tables&lt;br&gt;🟣 Purple = Course Content Tables&lt;br&gt;🟡 Yellow = Interaction/Transaction Tables&lt;br&gt;🟢 Green = AI/Analytics Tables&lt;br&gt;🔴 Red = System/Administrative Tables&lt;br&gt;⚫ Gray = Audit/Logging Tables" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="Legend">
+      <mxGeometry y="30" width="400" height="170" as="geometry" />
+    </mxCell>
+
+    <!-- DATABASE INFO -->
+    <mxCell id="DB_Info" value="&lt;b&gt;📊 DATABASE SPECIFICATIONS&lt;/b&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;fillColor=#f0f0f0;strokeColor=#666666;" vertex="1" parent="1">
+      <mxGeometry x="480" y="1220" width="400" height="180" as="geometry" />
+    </mxCell>
+    <mxCell id="DB_Info_Content" value="🗄️ &lt;b&gt;Database Engine:&lt;/b&gt; MySQL 8.0+ / PostgreSQL 13+&lt;br&gt;📊 &lt;b&gt;Total Tables:&lt;/b&gt; 15 Core Tables&lt;br&gt;🔗 &lt;b&gt;Relationships:&lt;/b&gt; 20+ Foreign Key Constraints&lt;br&gt;📈 &lt;b&gt;Indexes:&lt;/b&gt; Optimized for Performance&lt;br&gt;🔒 &lt;b&gt;Security:&lt;/b&gt; Row-Level Security, Audit Logging&lt;br&gt;⚡ &lt;b&gt;Performance:&lt;/b&gt; Partitioned Large Tables&lt;br&gt;💾 &lt;b&gt;Backup:&lt;/b&gt; Daily Automated Backups&lt;br&gt;🔄 &lt;b&gt;Replication:&lt;/b&gt; Master-Slave Setup&lt;br&gt;📊 &lt;b&gt;Analytics:&lt;/b&gt; JSON Fields for ML Data&lt;br&gt;🌐 &lt;b&gt;Scalability:&lt;/b&gt; Horizontal Scaling Ready&lt;br&gt;🔍 &lt;b&gt;Search:&lt;/b&gt; Full-Text Search Enabled&lt;br&gt;📱 &lt;b&gt;API Ready:&lt;/b&gt; RESTful API Compatible" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="DB_Info">
+      <mxGeometry y="30" width="400" height="150" as="geometry" />
+    </mxCell>
+
+  </root>
+</mxGraphModel>
