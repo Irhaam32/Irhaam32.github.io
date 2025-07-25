@@ -1,0 +1,421 @@
+<mxGraphModel dx="2120" dy="1548" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2200" pageHeight="1800" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+    
+    <!-- USER HIERARCHY - CORRECTED -->
+    <mxCell id="C_BaseUser" value="&lt;i&gt;&lt;&lt;abstract&gt;&gt;&lt;/i&gt;&lt;br&gt;&lt;b&gt;BaseUser&lt;/b&gt;" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+      <mxGeometry x="380" y="40" width="280" height="170" as="geometry" />
+    </mxCell>
+    <mxCell id="BaseUser_Attr" value="- user_id: int&lt;br&gt;- username: str&lt;br&gt;- email: str&lt;br&gt;- password_hash: str&lt;br&gt;- created_at: datetime&lt;br&gt;- is_active: bool" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="C_BaseUser">
+      <mxGeometry y="40" width="280" height="94" as="geometry" />
+    </mxCell>
+    <mxCell id="BaseUser_Sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="C_BaseUser">
+      <mxGeometry y="134" width="280" height="8" as="geometry" />
+    </mxCell>
+    <mxCell id="BaseUser_Meth" value="+ login(password: str): bool&lt;br&gt;+ logout(): void" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="C_BaseUser">
+      <mxGeometry y="142" width="280" height="28" as="geometry" />
+    </mxCell>
+
+    <mxCell id="C_Student" value="&lt;b&gt;Student&lt;/b&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+      <mxGeometry x="40" y="300" width="280" height="150" as="geometry" />
+    </mxCell>
+    <mxCell id="Student_Attr" value="- learning_style: str&lt;br&gt;- grade_level: int&lt;br&gt;- enrollment_date: datetime" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="C_Student">
+      <mxGeometry y="26" width="280" height="54" as="geometry" />
+    </mxCell>
+    <mxCell id="Student_Sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="C_Student">
+      <mxGeometry y="80" width="280" height="8" as="geometry" />
+    </mxCell>
+    <mxCell id="Student_Meth" value="+ start_quiz(quiz: Quiz): QuizAttempt&lt;br&gt;+ submit_quiz(attempt: QuizAttempt): dict&lt;br&gt;+ ask_chatbot(query: str): str&lt;br&gt;+ get_recommendations(): List[str]" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="C_Student">
+      <mxGeometry y="88" width="280" height="62" as="geometry" />
+    </mxCell>
+
+    <mxCell id="C_Teacher" value="&lt;b&gt;Teacher&lt;/b&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+      <mxGeometry x="380" y="300" width="280" height="130" as="geometry" />
+    </mxCell>
+    <mxCell id="Teacher_Attr" value="- department: str&lt;br&gt;- hire_date: datetime" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="C_Teacher">
+      <mxGeometry y="26" width="280" height="34" as="geometry" />
+    </mxCell>
+    <mxCell id="Teacher_Sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="C_Teacher">
+      <mxGeometry y="60" width="280" height="8" as="geometry" />
+    </mxCell>
+    <mxCell id="Teacher_Meth" value="+ create_course(title: str): Course&lt;br&gt;+ view_student_analytics(student: Student): dict&lt;br&gt;+ grade_quiz_attempts(attempts: List): void" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="C_Teacher">
+      <mxGeometry y="68" width="280" height="62" as="geometry" />
+    </mxCell>
+
+    <mxCell id="C_Admin" value="&lt;b&gt;Admin&lt;/b&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+      <mxGeometry x="720" y="300" width="280" height="110" as="geometry" />
+    </mxCell>
+    <mxCell id="Admin_Attr" value="- privileges: List[str]" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="C_Admin">
+      <mxGeometry y="26" width="280" height="24" as="geometry" />
+    </mxCell>
+    <mxCell id="Admin_Sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="C_Admin">
+      <mxGeometry y="50" width="280" height="8" as="geometry" />
+    </mxCell>
+    <mxCell id="Admin_Meth" value="+ create_user(username: str, role: str): BaseUser&lt;br&gt;+ disable_user(user: BaseUser): bool" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="C_Admin">
+      <mxGeometry y="58" width="280" height="52" as="geometry" />
+    </mxCell>
+
+    <!-- ENROLLMENT ASSOCIATION CLASS -->
+    <mxCell id="C_Enrollment" value="&lt;b&gt;Enrollment&lt;/b&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+      <mxGeometry x="40" y="500" width="280" height="130" as="geometry" />
+    </mxCell>
+    <mxCell id="Enrollment_Attr" value="- enrollment_id: int&lt;br&gt;- student_id: int&lt;br&gt;- course_id: int&lt;br&gt;- enrollment_date: datetime&lt;br&gt;- status: str" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="C_Enrollment">
+      <mxGeometry y="26" width="280" height="74" as="geometry" />
+    </mxCell>
+    <mxCell id="Enrollment_Sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="C_Enrollment">
+      <mxGeometry y="100" width="280" height="8" as="geometry" />
+    </mxCell>
+    <mxCell id="Enrollment_Meth" value="+ get_progress(): float" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="C_Enrollment">
+      <mxGeometry y="108" width="280" height="22" as="geometry" />
+    </mxCell>
+
+    <!-- CONTENT CLASSES - CORRECTED -->
+    <mxCell id="C_Course" value="&lt;b&gt;Course&lt;/b&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+      <mxGeometry x="380" y="500" width="280" height="130" as="geometry" />
+    </mxCell>
+    <mxCell id="Course_Attr" value="- course_id: int&lt;br&gt;- title: str&lt;br&gt;- description: str&lt;br&gt;- teacher_id: int" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="C_Course">
+      <mxGeometry y="26" width="280" height="64" as="geometry" />
+    </mxCell>
+    <mxCell id="Course_Sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="C_Course">
+      <mxGeometry y="90" width="280" height="8" as="geometry" />
+    </mxCell>
+    <mxCell id="Course_Meth" value="+ get_modules(): List[Module]&lt;br&gt;+ enroll_student(student: Student): void" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="C_Course">
+      <mxGeometry y="98" width="280" height="32" as="geometry" />
+    </mxCell>
+
+    <mxCell id="C_Module" value="&lt;b&gt;Module&lt;/b&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+      <mxGeometry x="720" y="500" width="280" height="130" as="geometry" />
+    </mxCell>
+    <mxCell id="Module_Attr" value="- module_id: int&lt;br&gt;- title: str&lt;br&gt;- description: str&lt;br&gt;- order_index: int" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="C_Module">
+      <mxGeometry y="26" width="280" height="64" as="geometry" />
+    </mxCell>
+    <mxCell id="Module_Sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="C_Module">
+      <mxGeometry y="90" width="280" height="8" as="geometry" />
+    </mxCell>
+    <mxCell id="Module_Meth" value="+ get_quizzes(): List[Quiz]&lt;br&gt;+ add_quiz(quiz: Quiz): void" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="C_Module">
+      <mxGeometry y="98" width="280" height="32" as="geometry" />
+    </mxCell>
+
+    <mxCell id="C_Quiz" value="&lt;b&gt;Quiz&lt;/b&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+      <mxGeometry x="1060" y="500" width="280" height="150" as="geometry" />
+    </mxCell>
+    <mxCell id="Quiz_Attr" value="- quiz_id: int&lt;br&gt;- title: str&lt;br&gt;- description: str&lt;br&gt;- time_limit: int&lt;br&gt;- max_attempts: int" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="C_Quiz">
+      <mxGeometry y="26" width="280" height="74" as="geometry" />
+    </mxCell>
+    <mxCell id="Quiz_Sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="C_Quiz">
+      <mxGeometry y="100" width="280" height="8" as="geometry" />
+    </mxCell>
+    <mxCell id="Quiz_Meth" value="+ get_questions(): List[Question]&lt;br&gt;+ calculate_score(responses: List): float&lt;br&gt;+ is_available(): bool" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="C_Quiz">
+      <mxGeometry y="108" width="280" height="42" as="geometry" />
+    </mxCell>
+
+    <mxCell id="C_Question" value="&lt;b&gt;Question&lt;/b&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+      <mxGeometry x="1400" y="500" width="280" height="150" as="geometry" />
+    </mxCell>
+    <mxCell id="Question_Attr" value="- question_id: int&lt;br&gt;- text: str&lt;br&gt;- topic_tag: str&lt;br&gt;- difficulty_level: int&lt;br&gt;- question_type: str" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="C_Question">
+      <mxGeometry y="26" width="280" height="84" as="geometry" />
+    </mxCell>
+    <mxCell id="Question_Sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="C_Question">
+      <mxGeometry y="110" width="280" height="8" as="geometry" />
+    </mxCell>
+    <mxCell id="Question_Meth" value="+ get_answer_options(): List[AnswerOption]&lt;br&gt;+ validate_answer(answer: str): bool" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="C_Question">
+      <mxGeometry y="118" width="280" height="32" as="geometry" />
+    </mxCell>
+
+    <mxCell id="C_AnswerOption" value="&lt;b&gt;AnswerOption&lt;/b&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+      <mxGeometry x="1400" y="720" width="280" height="110" as="geometry" />
+    </mxCell>
+    <mxCell id="AO_Attr" value="- option_id: int&lt;br&gt;- question_id: int&lt;br&gt;- text: str&lt;br&gt;- is_correct: bool" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="C_AnswerOption">
+      <mxGeometry y="26" width="280" height="64" as="geometry" />
+    </mxCell>
+    <mxCell id="AO_Sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="C_AnswerOption">
+      <mxGeometry y="90" width="280" height="8" as="geometry" />
+    </mxCell>
+    <mxCell id="AO_Meth" value="+ is_valid(): bool" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="C_AnswerOption">
+      <mxGeometry y="98" width="280" height="12" as="geometry" />
+    </mxCell>
+
+    <!-- INTERACTION CLASSES - CORRECTED -->
+    <mxCell id="C_QuizAttempt" value="&lt;b&gt;QuizAttempt&lt;/b&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+      <mxGeometry x="380" y="720" width="280" height="170" as="geometry" />
+    </mxCell>
+    <mxCell id="QA_Attr" value="- attempt_id: int&lt;br&gt;- student_id: int&lt;br&gt;- quiz_id: int&lt;br&gt;- score: float&lt;br&gt;- is_passed: bool&lt;br&gt;- start_time: datetime&lt;br&gt;- completed_at: datetime" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="C_QuizAttempt">
+      <mxGeometry y="26" width="280" height="104" as="geometry" />
+    </mxCell>
+    <mxCell id="QA_Sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="C_QuizAttempt">
+      <mxGeometry y="130" width="280" height="8" as="geometry" />
+    </mxCell>
+    <mxCell id="QA_Meth" value="+ get_responses(): List[StudentResponse]&lt;br&gt;+ calculate_final_score(): float" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="C_QuizAttempt">
+      <mxGeometry y="138" width="280" height="32" as="geometry" />
+    </mxCell>
+
+    <mxCell id="C_StudentResponse" value="&lt;b&gt;StudentResponse&lt;/b&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+      <mxGeometry x="720" y="720" width="280" height="130" as="geometry" />
+    </mxCell>
+    <mxCell id="SR_Attr" value="- response_id: int&lt;br&gt;- attempt_id: int&lt;br&gt;- question_id: int&lt;br&gt;- chosen_option_id: int&lt;br&gt;- is_correct: bool" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="C_StudentResponse">
+      <mxGeometry y="26" width="280" height="74" as="geometry" />
+    </mxCell>
+    <mxCell id="SR_Sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="C_StudentResponse">
+      <mxGeometry y="100" width="280" height="8" as="geometry" />
+    </mxCell>
+    <mxCell id="SR_Meth" value="+ validate_answer(): bool" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="C_StudentResponse">
+      <mxGeometry y="108" width="280" height="22" as="geometry" />
+    </mxCell>
+
+    <!-- AI SERVICES - CORRECTED -->
+    <mxCell id="C_AnalyticsService" value="&lt;i&gt;&lt;&lt;Service&gt;&gt;&lt;/i&gt;&lt;br&gt;&lt;b&gt;AnalyticsService&lt;/b&gt;" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+      <mxGeometry x="40" y="970" width="320" height="130" as="geometry" />
+    </mxCell>
+    <mxCell id="AS_Attr" value="- ml_model: object" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="C_AnalyticsService">
+      <mxGeometry y="40" width="320" height="24" as="geometry" />
+    </mxCell>
+    <mxCell id="AS_Sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="C_AnalyticsService">
+      <mxGeometry y="64" width="320" height="8" as="geometry" />
+    </mxCell>
+    <mxCell id="AS_Meth" value="+ analyze_performance(student: Student): dict&lt;br&gt;+ identify_strengths(student: Student): List[str]&lt;br&gt;+ identify_weaknesses(student: Student): List[str]" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="C_AnalyticsService">
+      <mxGeometry y="72" width="320" height="58" as="geometry" />
+    </mxCell>
+
+    <mxCell id="C_RecommendationService" value="&lt;i&gt;&lt;&lt;Service&gt;&gt;&lt;/i&gt;&lt;br&gt;&lt;b&gt;RecommendationService&lt;/b&gt;" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+      <mxGeometry x="420" y="970" width="320" height="110" as="geometry" />
+    </mxCell>
+    <mxCell id="RS_Attr" value="- recommendation_engine: object" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="C_RecommendationService">
+      <mxGeometry y="40" width="320" height="24" as="geometry" />
+    </mxCell>
+    <mxCell id="RS_Sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="C_RecommendationService">
+      <mxGeometry y="64" width="320" height="8" as="geometry" />
+    </mxCell>
+    <mxCell id="RS_Meth" value="+ get_recommendations(weaknesses: List[str]): List[str]&lt;br&gt;+ personalize_content(student: Student): List[Module]" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="C_RecommendationService">
+      <mxGeometry y="72" width="320" height="38" as="geometry" />
+    </mxCell>
+
+    <mxCell id="C_ChatbotService" value="&lt;i&gt;&lt;&lt;Service&gt;&gt;&lt;/i&gt;&lt;br&gt;&lt;b&gt;ChatbotService&lt;/b&gt;" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+      <mxGeometry x="800" y="970" width="320" height="130" as="geometry" />
+    </mxCell>
+    <mxCell id="CS_Attr" value="- nlp_model: object&lt;br&gt;- knowledge_base: dict" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="C_ChatbotService">
+      <mxGeometry y="40" width="320" height="34" as="geometry" />
+    </mxCell>
+    <mxCell id="CS_Sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="C_ChatbotService">
+      <mxGeometry y="74" width="320" height="8" as="geometry" />
+    </mxCell>
+    <mxCell id="CS_Meth" value="+ get_response(query: str, context: dict): str&lt;br&gt;+ understand_intent(text: str): str&lt;br&gt;+ provide_help(topic: str): str" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="C_ChatbotService">
+      <mxGeometry y="82" width="320" height="48" as="geometry" />
+    </mxCell>
+
+    <!-- INHERITANCE RELATIONSHIPS -->
+    <mxCell id="R_Inheritance_Student" style="endArrow=block;html=1;rounded=0;endFill=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.2;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="C_Student" target="C_BaseUser">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="180" y="300" as="sourcePoint" />
+        <mxPoint x="436" y="210" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    
+    <mxCell id="R_Inheritance_Teacher" style="endArrow=block;html=1;rounded=0;endFill=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="C_Teacher" target="C_BaseUser">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="520" y="300" as="sourcePoint" />
+        <mxPoint x="520" y="210" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    
+    <mxCell id="R_Inheritance_Admin" style="endArrow=block;html=1;rounded=0;endFill=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.8;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="C_Admin" target="C_BaseUser">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="860" y="300" as="sourcePoint" />
+        <mxPoint x="604" y="210" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- ASSOCIATION RELATIONSHIPS -->
+    <mxCell id="R_Teacher_Course" value="creates" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="C_Teacher" target="C_Course">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="520" y="430" as="sourcePoint" />
+        <mxPoint x="520" y="500" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="Card_Teacher_Course_1" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="R_Teacher_Course">
+      <mxGeometry x="-0.8" y="-10" as="geometry" />
+    </mxCell>
+    <mxCell id="Card_Teacher_Course_M" value="0..*" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="R_Teacher_Course">
+      <mxGeometry x="0.8" y="-10" as="geometry" />
+    </mxCell>
+
+    <!-- ENROLLMENT RELATIONSHIPS -->
+    <mxCell id="R_Student_Enrollment" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="C_Student" target="C_Enrollment">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="180" y="450" as="sourcePoint" />
+        <mxPoint x="180" y="500" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="Card_Student_Enrollment" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="R_Student_Enrollment">
+      <mxGeometry x="-0.8" y="-10" as="geometry" />
+    </mxCell>
+    <mxCell id="Card_Enrollment_Student" value="*" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="R_Student_Enrollment">
+      <mxGeometry x="0.8" y="-10" as="geometry" />
+    </mxCell>
+
+    <mxCell id="R_Course_Enrollment" value="" style="endArrow=classic;html=1;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="C_Course" target="C_Enrollment">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="380" y="565" as="sourcePoint" />
+        <mxPoint x="320" y="565" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="Card_Course_Enrollment" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="R_Course_Enrollment">
+      <mxGeometry x="-0.8" y="-10" as="geometry" />
+    </mxCell>
+    <mxCell id="Card_Enrollment_Course" value="*" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="R_Course_Enrollment">
+      <mxGeometry x="0.8" y="-10" as="geometry" />
+    </mxCell>
+
+    <!-- COMPOSITION RELATIONSHIPS -->
+    <mxCell id="R_Course_Module" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;startArrow=diamond;startFill=1;startSize=12;" edge="1" parent="1" source="C_Course" target="C_Module">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="660" y="565" as="sourcePoint" />
+        <mxPoint x="720" y="565" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="Card_Course_Module_1" value="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="R_Course_Module">
+      <mxGeometry x="-0.9" y="-10" as="geometry" />
+    </mxCell>
+    <mxCell id="Card_Course_Module_M" value="1..*" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="R_Course_Module">
+      <mxGeometry x="0.9" y="-10" as="geometry" />
+    </mxCell>
+
+    <mxCell id="R_Module_Quiz" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;startArrow=diamond;startFill=1;startSize=12;" edge="1" parent="1" source="C_Module" target="C_Quiz">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="1000" y="565" as="sourcePoint" />
+        <mxPoint x="1060" y="575" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="Card_Module_Quiz_1" value="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="R_Module_Quiz">
+      <mxGeometry x="-0.9" y="-10" as="geometry" />
+    </mxCell>
+    <mxCell id="Card_Module_Quiz_M" value="0..*" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="R_Module_Quiz">
+      <mxGeometry x="0.9" y="-10" as="geometry" />
+    </mxCell>
+
+    <mxCell id="R_Quiz_Question" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;startArrow=diamond;startFill=1;startSize=12;" edge="1" parent="1" source="C_Quiz" target="C_Question">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="1340" y="575" as="sourcePoint" />
+        <mxPoint x="1400" y="575" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="Card_Quiz_Question_1" value="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="R_Quiz_Question">
+      <mxGeometry x="-0.9" y="-10" as="geometry" />
+    </mxCell>
+    <mxCell id="Card_Quiz_Question_M" value="1..*" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="R_Quiz_Question">
+      <mxGeometry x="0.9" y="-10" as="geometry" />
+    </mxCell>
+
+    <mxCell id="R_Question_AnswerOption" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;startArrow=diamond;startFill=1;startSize=12;" edge="1" parent="1" source="C_Question" target="C_AnswerOption">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="1540" y="650" as="sourcePoint" />
+        <mxPoint x="1540" y="720" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="Card_Question_AO_1" value="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="R_Question_AnswerOption">
+      <mxGeometry x="-0.9" y="-10" as="geometry" />
+    </mxCell>
+    <mxCell id="Card_Question_AO_M" value="2..*" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="R_Question_AnswerOption">
+      <mxGeometry x="0.9" y="-10" as="geometry" />
+    </mxCell>
+
+    <!-- QUIZ ATTEMPT RELATIONSHIPS -->
+    <mxCell id="R_Student_Attempt" value="takes" style="endArrow=classic;html=1;rounded=0;exitX=0.8;exitY=1;exitDx=0;exitDy=0;entryX=0.2;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="C_Student" target="C_QuizAttempt">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="264" y="450" as="sourcePoint" />
+        <mxPoint x="436" y="720" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="Card_Student_Attempt_1" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="R_Student_Attempt">
+      <mxGeometry x="-0.8" y="-10" as="geometry" />
+    </mxCell>
+    <mxCell id="Card_Student_Attempt_M" value="*" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="R_Student_Attempt">
+      <mxGeometry x="0.8" y="-10" as="geometry" />
+    </mxCell>
+
+    <mxCell id="R_Quiz_Attempt" value="generates" style="endArrow=classic;html=1;rounded=0;exitX=0.2;exitY=1;exitDx=0;exitDy=0;entryX=0.8;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="C_Quiz" target="C_QuizAttempt">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="1116" y="650" as="sourcePoint" />
+        <mxPoint x="604" y="720" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="Card_Quiz_Attempt_1" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="R_Quiz_Attempt">
+      <mxGeometry x="-0.8" y="-10" as="geometry" />
+    </mxCell>
+    <mxCell id="Card_Quiz_Attempt_M" value="*" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="R_Quiz_Attempt">
+      <mxGeometry x="0.8" y="-10" as="geometry" />
+    </mxCell>
+
+    <mxCell id="R_Attempt_Response" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;startArrow=diamond;startFill=1;startSize=12;" edge="1" parent="1" source="C_QuizAttempt" target="C_StudentResponse">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="660" y="805" as="sourcePoint" />
+        <mxPoint x="720" y="785" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="Card_Attempt_Response_1" value="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="R_Attempt_Response">
+      <mxGeometry x="-0.9" y="-10" as="geometry" />
+    </mxCell>
+    <mxCell id="Card_Attempt_Response_M" value="1..*" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="R_Attempt_Response">
+      <mxGeometry x="0.9" y="-10" as="geometry" />
+    </mxCell>
+
+    <mxCell id="R_Question_Response" value="answered by" style="endArrow=classic;html=1;rounded=0;exitX=0.2;exitY=1;exitDx=0;exitDy=0;entryX=0.8;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="C_Question" target="C_StudentResponse">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="1456" y="650" as="sourcePoint" />
+        <mxPoint x="944" y="720" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="Card_Question_Response_1" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="R_Question_Response">
+      <mxGeometry x="-0.8" y="-10" as="geometry" />
+    </mxCell>
+    <mxCell id="Card_Question_Response_M" value="*" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="R_Question_Response">
+      <mxGeometry x="0.8" y="-10" as="geometry" />
+    </mxCell>
+
+    <mxCell id="R_AnswerOption_Response" value="references" style="endArrow=classic;html=1;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="C_AnswerOption" target="C_StudentResponse">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="1400" y="775" as="sourcePoint" />
+        <mxPoint x="1000" y="785" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="Card_AO_Response_1" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="R_AnswerOption_Response">
+      <mxGeometry x="-0.8" y="-10" as="geometry" />
+    </mxCell>
+    <mxCell id="Card_AO_Response_M" value="*" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="R_AnswerOption_Response">
+      <mxGeometry x="0.8" y="-10" as="geometry" />
+    </mxCell>
+
+    <!-- SERVICE DEPENDENCIES -->
+    <mxCell id="R_Analytics_Attempt" value="analyzes" style="endArrow=open;html=1;rounded=0;dashed=1;exitX=0.8;exitY=0;exitDx=0;exitDy=0;entryX=0.2;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="C_AnalyticsService" target="C_QuizAttempt">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="296" y="970" as="sourcePoint" />
+        <mxPoint x="436" y="890" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <mxCell id="R_RecSvc_AnalyticsSvc" value="uses" style="endArrow=open;html=1;rounded=0;dashed=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="C_RecommendationService" target="C_AnalyticsService">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="420" y="1025" as="sourcePoint" />
+        <mxPoint x="360" y="1035" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <mxCell id="R_Student_Recommendation" value="gets recommendations" style="endArrow=open;html=1;rounded=0;dashed=1;exitX=0.2;exitY=1;exitDx=0;exitDy=0;entryX=0.2;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="C_Student" target="C_RecommendationService">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="96" y="450" as="sourcePoint" />
+        <mxPoint x="484" y="970" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <mxCell id="R_Student_Chat" value="interacts with" style="endArrow=open;html=1;rounded=0;dashed=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="C_Student" target="C_ChatbotService">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="180" y="450" as="sourcePoint" />
+        <mxPoint x="960" y="970" as="targetPoint" />
+        <Array as="points">
+          <mxPoint x="180" y="680" />
+          <mxPoint x="960" y="680" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+  </root>
+</mxGraphModel>
