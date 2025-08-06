@@ -1,0 +1,107 @@
+---
+title: RAG System Architecture - Complete Document Processing & Query Pipeline
+---
+flowchart TD
+    %% COLUMN 1: INGESTION FLOW
+    subgraph INGESTION_COL ["🔵 INGESTION FLOW<br/>(When a Bot Creator uploads a document)"]
+        %% Actor
+        BC[👤 Bot Creator<br/>(SaaS User)]:::actor
+        
+        %% Backend Server Swimlane
+        subgraph ING_BACKEND ["🖥️ Your Backend Server"]
+            ING_PYTHON[🐍 Python Application<br/>(FastAPI)]:::serverComponent
+            ING_FAISS[🧠 FAISS Library<br/>(In-Memory)]:::serverComponent
+            
+            subgraph ING_STORAGE ["💾 Local Disk Storage"]
+                ING_ORIG[📁 /original_files/<br/>{user_id}/{bot_id}/]:::storage
+                ING_VECTOR[📁 /vector_indexes/<br/>{user_id}/{bot_id}/]:::storage
+            end
+        end
+        
+        %% Cloud APIs Swimlane
+        subgraph ING_CLOUD ["☁️ Cloud APIs"]
+            ING_EMBED[🔗 OpenAI Embedding API]:::cloudApi
+        end
+    end
+    
+    %% COLUMN SEPARATOR
+    SEPARATOR["|"]:::separator
+    
+    %% COLUMN 2: QUERY FLOW
+    subgraph QUERY_COL ["🟢 QUERY FLOW<br/>(When an End-User chats with the bot)"]
+        %% Actor
+        EU[👥 End-User<br/>(via Iframe)]:::actor
+        
+        %% Backend Server Swimlane
+        subgraph QUERY_BACKEND ["🖥️ Your Backend Server"]
+            QUERY_PYTHON[🐍 Python Application<br/>(FastAPI)]:::serverComponent
+            QUERY_FAISS[🧠 FAISS Library<br/>(In-Memory)]:::serverComponent
+            
+            subgraph QUERY_STORAGE ["💾 Local Disk Storage"]
+                QUERY_VECTOR[📁 /vector_indexes/<br/>{user_id}/{bot_id}/]:::storage
+                QUERY_CHAT[📁 /chat_history/<br/>{chat_id}.json]:::storage
+            end
+            
+            PROMPT_NOTE["📝 Prompt Contains:<br/>• Retrieved Chunks<br/>• Chat History<br/>• New User Query"]:::note
+        end
+        
+        %% Cloud APIs Swimlane
+        subgraph QUERY_CLOUD ["☁️ Cloud APIs"]
+            QUERY_EMBED[🔗 OpenAI Embedding API]:::cloudApi
+            LLM_API[🤖 LLM API<br/>(GPT-4o / Claude 3)]:::cloudApi
+        end
+    end
+    
+    %% INGESTION FLOW ARROWS (Blue)
+    BC -->|"1. Uploads Document<br/>({user_id}, {bot_id})"| ING_PYTHON
+    ING_PYTHON -->|"2. Saves Original File"| ING_ORIG
+    ING_PYTHON -->|"3. Sends Chunks<br/>for Embedding"| ING_EMBED
+    ING_EMBED -->|"4. Receives Vectors"| ING_PYTHON
+    ING_PYTHON -->|"5. Builds Index"| ING_FAISS
+    ING_FAISS -->|"6. Saves Index<br/>to Disk"| ING_VECTOR
+    
+    %% QUERY FLOW ARROWS (Green)
+    EU -->|"7. Sends Query<br/>({user_id}, {bot_id}, {chat_id})"| QUERY_PYTHON
+    QUERY_CHAT -->|"8. Loads History"| QUERY_PYTHON
+    QUERY_VECTOR -->|"9. Loads Index File"| QUERY_PYTHON
+    QUERY_PYTHON -->|"10. Populates<br/>In-Memory Index"| QUERY_FAISS
+    QUERY_PYTHON -->|"11. Embeds User Query"| QUERY_EMBED
+    QUERY_EMBED -->|"12. Returns Query Vector"| QUERY_PYTHON
+    QUERY_PYTHON -->|"13. Searches for Context"| QUERY_FAISS
+    QUERY_FAISS -->|"14. Returns Relevant Chunks"| QUERY_PYTHON
+    QUERY_PYTHON -->|"15. Sends Augmented Prompt"| LLM_API
+    QUERY_PYTHON -.->|"References"| PROMPT_NOTE
+    LLM_API -->|"16. Generates Answer"| QUERY_PYTHON
+    QUERY_PYTHON -->|"17. Updates History"| QUERY_CHAT
+    QUERY_PYTHON -.->|"18. Streams Final Answer"| EU
+    
+    %% STYLING DEFINITIONS
+    classDef actor fill:#e3f2fd,stroke:#1976d2,stroke-width:3px,color:#000
+    classDef serverComponent fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#000
+    classDef storage fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#000
+    classDef cloudApi fill:#e8f5e8,stroke:#388e3c,stroke-width:2px,color:#000
+    classDef note fill:#fff9c4,stroke:#f9a825,stroke-width:2px,color:#000
+    classDef separator fill:transparent,stroke:transparent,color:transparent
+    
+    %% LINK STYLING
+    %% Ingestion Flow (Blue)
+    linkStyle 0 stroke:#2196f3,stroke-width:4px
+    linkStyle 1 stroke:#2196f3,stroke-width:4px
+    linkStyle 2 stroke:#2196f3,stroke-width:4px
+    linkStyle 3 stroke:#2196f3,stroke-width:4px
+    linkStyle 4 stroke:#2196f3,stroke-width:4px
+    linkStyle 5 stroke:#2196f3,stroke-width:4px
+    
+    %% Query Flow (Green)
+    linkStyle 6 stroke:#4caf50,stroke-width:4px
+    linkStyle 7 stroke:#4caf50,stroke-width:4px
+    linkStyle 8 stroke:#4caf50,stroke-width:4px
+    linkStyle 9 stroke:#4caf50,stroke-width:4px
+    linkStyle 10 stroke:#4caf50,stroke-width:4px
+    linkStyle 11 stroke:#4caf50,stroke-width:4px
+    linkStyle 12 stroke:#4caf50,stroke-width:4px
+    linkStyle 13 stroke:#4caf50,stroke-width:4px
+    linkStyle 14 stroke:#4caf50,stroke-width:4px
+    linkStyle 15 stroke:#ff9800,stroke-width:2px,stroke-dasharray: 5 5
+    linkStyle 16 stroke:#4caf50,stroke-width:4px
+    linkStyle 17 stroke:#4caf50,stroke-width:4px
