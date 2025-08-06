@@ -1,0 +1,85 @@
+---
+title: Detailed RAG Architecture with Local FAISS and Chat History
+---
+flowchart TD
+    %% Actor Definitions
+    BC[👤 Bot Creator]:::botCreator
+    EU[👥 End-User]:::endUser
+    
+    %% System Environment Containers
+    subgraph BACKEND ["🖥️ Your Backend Server"]
+        FA[🐍 Python Application<br/>FastAPI]
+        
+        subgraph STORAGE ["💾 Local Disk Storage"]
+            subgraph ORIG ["📁 /original_files/"]
+                OF["{user_id}/{bot_id}/<br/>document.pdf"]
+            end
+            
+            subgraph VECTORS ["📁 /vector_indexes/"]
+                VF["{user_id}/{bot_id}/<br/>index.faiss"]
+            end
+            
+            subgraph CHATS ["📁 /chat_history/"]
+                CF["{chat_id}.json<br/>(last 10 messages)"]
+            end
+        end
+        
+        FAISS_MEM["🧠 FAISS Library<br/>(In-Memory)"]
+    end
+    
+    subgraph CLOUD ["☁️ External Cloud APIs"]
+        EMBED["🔗 OpenAI Embedding API"]
+        LLM["🤖 LLM API<br/>(GPT-4o / Claude 3)"]
+    end
+    
+    %% INGESTION FLOW (Blue) - Steps 1-7
+    BC -->|"1. Upload document<br/>(user_id, bot_id)"| FA
+    FA -->|"2. Save original<br/>document"| OF
+    FA -->|"3. Load, extract &<br/>chunk text"| FA
+    FA -->|"4. Send text chunks<br/>for embedding"| EMBED
+    EMBED -->|"5. Return vectors"| FA
+    FA -->|"6. Build FAISS index<br/>from vectors"| FAISS_MEM
+    FAISS_MEM -->|"7. Save index<br/>to disk"| VF
+    
+    %% QUERY FLOW (Green) - Steps 8-16
+    EU -->|"8. Send message<br/>(user_id, bot_id, chat_id, query)"| FA
+    FA -->|"9. Load chat history<br/>(last 10 messages)"| CF
+    FA -->|"10. Load bot's<br/>index file"| VF
+    VF -->|"11. Load into<br/>memory"| FAISS_MEM
+    FA -->|"12. Send query<br/>for embedding"| EMBED
+    EMBED -->|"13. Return query<br/>vector"| FA
+    FA -->|"14. Search index<br/>with query vector"| FAISS_MEM
+    FAISS_MEM -->|"15. Return relevant<br/>text chunks (context)"| FA
+    FA -->|"16. Send augmented prompt<br/>(context + history + query)"| LLM
+    LLM -->|"17. Generate final<br/>answer"| FA
+    FA -->|"18. Stream answer<br/>to user"| EU
+    FA -->|"19. Update & save<br/>chat history"| CF
+    
+    %% Styling
+    classDef botCreator fill:#e1f5fe,stroke:#01579b,stroke-width:2px,color:#000
+    classDef endUser fill:#f3e5f5,stroke:#4a148c,stroke-width:2px,color:#000
+    classDef storage fill:#fff3e0,stroke:#e65100,stroke-width:2px
+    classDef cloud fill:#f1f8e9,stroke:#33691e,stroke-width:2px
+    classDef backend fill:#fce4ec,stroke:#880e4f,stroke-width:2px
+    
+    %% Link Styling for Flows
+    linkStyle 0 stroke:#2196f3,stroke-width:3px
+    linkStyle 1 stroke:#2196f3,stroke-width:3px
+    linkStyle 2 stroke:#2196f3,stroke-width:3px
+    linkStyle 3 stroke:#2196f3,stroke-width:3px
+    linkStyle 4 stroke:#2196f3,stroke-width:3px
+    linkStyle 5 stroke:#2196f3,stroke-width:3px
+    linkStyle 6 stroke:#2196f3,stroke-width:3px
+    
+    linkStyle 7 stroke:#4caf50,stroke-width:3px
+    linkStyle 8 stroke:#4caf50,stroke-width:3px
+    linkStyle 9 stroke:#4caf50,stroke-width:3px
+    linkStyle 10 stroke:#4caf50,stroke-width:3px
+    linkStyle 11 stroke:#4caf50,stroke-width:3px
+    linkStyle 12 stroke:#4caf50,stroke-width:3px
+    linkStyle 13 stroke:#4caf50,stroke-width:3px
+    linkStyle 14 stroke:#4caf50,stroke-width:3px
+    linkStyle 15 stroke:#4caf50,stroke-width:3px
+    linkStyle 16 stroke:#4caf50,stroke-width:3px
+    linkStyle 17 stroke:#4caf50,stroke-width:3px
+    linkStyle 18 stroke:#4caf50,stroke-width:3px
